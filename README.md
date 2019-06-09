@@ -1,9 +1,8 @@
 ## A* Search Experiment
 
-####Sequence: 
+Sequence: 
 
-_PredictedTimeToComplete, ActualTimetoComplete, Objective/State,_
-
+_PredictedTimeToComplete, ActualTimetoComplete, Objective,_  
 <1, 5,~~There is a X*Y grid,~~  
 <1, ,There are agents,  
 <1, ,An agent can occupy  a coordinate in the grid,  
