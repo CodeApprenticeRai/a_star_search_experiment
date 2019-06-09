@@ -1,0 +1,11 @@
+{
+  "name": "a_star_serach_experiment",
+  "version": "1.0.0",
+  "description": "Hypothesis: A* Search is a cool general purpose search algorithm that I should know how to implement as a skill ",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Taré Gaskin",
+  "license": "ISC"
+}
