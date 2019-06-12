@@ -4,7 +4,7 @@ class App {
     this.ctx = this.canvas.getContext('2d');
 
     document.addEventListener("keydown", keyDownHandler, false);
-    document.addEventListener("keyup", keyUpHandler, false);
+    // document.addEventListener("keyup", keyUpHandler, false);
 
     var N=15;
     this.num_rows= N ? N: 5;
@@ -17,6 +17,9 @@ class App {
       this.board_state[i] = new Array(this.num_columns);
       for (var j=0; j < this.num_columns; j++){
           this.board_state[i][j] = 0;
+          if ((i == 5 ) && (j == 5)){
+            this.board_state[i][j] = 1;
+          }
       }
     }
 
@@ -59,6 +62,8 @@ class App {
     // this.ctx.fillStyle = 'grey';
     // this.ctx.fillRect( 5*this.column_step, 5*this.row_step,this.column_step, this.row_step);
 
+
+
     this.ctx.beginPath();
     this.ctx.fillStyle = 'black';
     this.ctx.arc( 5*this.column_step + this.column_step/2, 5*this.row_step + this.row_step/2, this.column_step-30, 0, 2 * Math.PI);
@@ -70,33 +75,49 @@ class App {
 
 function keyDownHandler(event){
   if (event.keyCode == 38){
-    upPressed = true;
+    _globals.moveUpActionScheduled = true;
+
+    _globals.moveDownActionScheduled = false;
+    _globals.moveLeftActionScheduled= false;
+    _globals.moveRightActionScheduled= false;
   }
   else if (event.keyCode == 40){
-    downPressed = true;
+    _globals.moveDownActionScheduled = true;
+
+    _globals.moveUpActionScheduled = false;
+    _globals.moveLeftActionScheduled= false;
+    _globals.moveRightActionScheduled= false;
   }
   else if (event.keyCode == 37){
-    leftPressed = true;
+    _globals.moveLeftActionScheduled= true;
+
+    _globals.moveUpActionScheduled= false;
+    _globals.moveDownActionScheduled = false;
+    _globals.moveRightActionScheduled= false;
   }
   else if (event.keyCode == 39){
-    rightPressed = true;
+    _globals.moveRightActionScheduled= true;
+
+    _globals.moveUpActionScheduled= false;
+    _globals.moveDownActionScheduled = false;
+    _globals.moveLeftActionScheduled= false;
   }
 }
 
-function keyUpHandler(event){
-  if (event.keyCode == 38){
-    upPressed = false;
-  }
-  else if (event.keyCode == 40){
-    downPressed = false;
-  }
-  else if (event.keyCode == 37){
-    leftPressed = false;
-  }
-  else if (event.keyCode == 39){
-    rightPressed = false;
-  }
-}
+// function keyUpHandler(event){
+//   if (event.keyCode == 38){
+//     upPressed = false;
+//   }
+//   else if (event.keyCode == 40){
+//     downPressed = false;
+//   }
+//   else if (event.keyCode == 37){
+//     leftPressed = false;
+//   }
+//   else if (event.keyCode == 39){
+//     rightPressed = false;
+//   }
+// }
 
 // class Grid {
 //   constructor(this.canvas, this.num_columns, num_rows){ // height and width are ints denoting the number of squares in column and row respectively
@@ -132,5 +153,12 @@ class Agent extends BoardObject{
 
 
 //main
-var app = new App();
+var _globals = {
+  "moveUpActionScheduled": true,
+  "moveDownActionScheduled": true,
+  "moveLeftActionScheduled": true,
+  "moveRightActionScheduled": true
+}
+
+var app = new App(_global);
 //end of main
